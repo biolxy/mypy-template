@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""
-File Name   : Standard.py .
+File Name   : aa.py .
 
 Author      : biolxy
 E-mail      : biolxy@aliyun.com
-Created Time: 2018-07-24 13:53:32
+Created Time: 2018-09-17 12:10:33
 version     : 1.0
-Function    : This is a test.
+Function    : The is a template.
 """
 from util.base import color_term
 from util.base import execute_cmd
