@@ -22,15 +22,22 @@ __VERSION__ = 'v1.0'
 
 
 def main():
-    u"""主要的函数流程."""
+    stepName = "fastp"
+    equalSignNumber = 60
     start_time = time.time()
-    for i in os.listdir(input_dir):
-        if re.match("_muts.txt", i):
-            file1 = os.path.join(input_dir, i)
-    print(file1)
-    print(color_term("main function execute time: {}s".format(
-        round(time.time() - start_time, 2))
-        ))
+    start_time2 = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(start_time/1000))
+    print(color_term("{}".format("=" * equalSignNumber)))
+    print(color_term("[{} in start in time: {}]".format(stepName , start_time2)))
+    print(color_term("{}".format("=" * equalSignNumber)))
+    # start pipelien
+    
+    # end
+    end_time = time.time()
+    end_time2 = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(end_time/1000))
+    ran_time = (end_time - start_time) / 60
+    print(color_term("{}".format("=" * equalSignNumber)))
+    print(color_term("[{} in end in time: {}, elapsed {:.1f} min]".format( stepName, end_time2, ran_time)))
+    print(color_term("{}".format("=" * equalSignNumber)))
 
 
 if __name__ == '__main__':
