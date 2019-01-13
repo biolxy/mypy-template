@@ -58,26 +58,31 @@ class StreamToLogger(object):
     # logger = logging.getLogger('log')
 
 
-def execute_cmd(cmd):
+def execute_cmd(cmd, printStstus=True):
     u"""Change sys.system(),提供安全的shell输入端口，为以后web键入命令提供基础,适配py2, py3.
 
     execute_cmd 中可以直接嵌套 linux命令，同样可以嵌套类似 python script.py inputfile 等命令
     通常用法为 execute_cmd("mkdir {}".format())
     该函数调用 color_term 函数
     """
-    print(color_term(
-        "Command will be execute in a subshell: {}".format(cmd),
-        'cyan'
-        ))
+    # https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p06_executing_external_command_and_get_its_output.html
+    print(color_term("Command will be execute in a subshell:\n{}".format(cmd), 'cyan', bold= False))
     try:
-        p = subprocess.Popen(
-            shlex.split(cmd),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-            )
-        for line in iter(p.stdout.readline, b''):
-            print(line.rstrip().decode())
-        error = p.stderr.read().decode()
+        p = subprocess.Popen(shlex.split(cmd),
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE)
+        # To interpret as text, decode
+        p.wait()
+        if printStstus == True:
+            for line in iter(p.stdout.readline, b''):
+                print(line.rstrip().decode())
+        else:
+            pass
+        for line in iter(p.stderr.readline, b''):
+            print(color_term("{}".format(line.rstrip().decode()), 'yellow'))
+        code = int(p.returncode)
+        if code != 0:
+            print(color_term("This command returncode is {}".format(code), 'red'))
     except Exception as e:
-        print(color_term("Unexpected command: {}".format(cmd), 'red'))
-        raise Exception(error)
+        raise Exception(color_term(e, 'red'))
+
