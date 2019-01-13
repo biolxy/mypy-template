@@ -1,16 +1,16 @@
-# 标准模板 Standard.py 脚本的介绍
+# 标准模板 template.py 脚本的介绍
 目录
 <!-- MarkdownTOC -->
 
 - 1、 util模块包的构建及使用
 - 2、 util.base 中提供的基本功能
-- 3、 Standard.py
+- 3、 template.py
 
 <!-- /MarkdownTOC -->
 
 
 
-Standard.py是一个我想创建的标准python模板，我认为一个标准的py脚本应该包含该脚本提供的所有基本功能
+template.py是一个我想创建的标准python模板，我认为一个标准的py脚本应该包含该脚本提供的所有基本功能
 
 ## 1、 util模块包的构建及使用
 + 构建  
@@ -35,7 +35,8 @@ from util.base import color_term  #此时该脚本和文件夹util在同一目�
 + shell命令行的嵌套
     * function execute_cmd 
 + 确定输入文件 import re，os
-## 3、 Standard.py
+## 3、 template.py
 + 通过 import argparse，使用参数
 + 输出程序运行时间 import time
++ 通过 ConfigParser 模块和 config.ini文件来配置程序中的数据文件
 
