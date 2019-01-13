@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""
-File Name   : aa.py .
+File Name   : template.py .
 
 Author      : biolxy
 E-mail      : biolxy@aliyun.com
@@ -16,35 +16,39 @@ import os
 import re
 import time
 import argparse
+from configparser import ConfigParser
+# https://python3-cookbook.readthedocs.io/zh_CN/latest/c13/p10_read_configuration_files.html
 
 __VERSION__ = 'v1.0'
-
 
 
 def main():
     stepName = "fastp"
     equalSignNumber = 60
     start_time = time.time()
-    start_time2 = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(start_time/1000))
+    start_time2 = time.strftime(
+        '%Y-%m-%d %H:%M:%S', time.localtime(start_time))
     print(color_term("{}".format("=" * equalSignNumber)))
-    print(color_term("[{} in start in time: {}]".format(stepName , start_time2)))
+    print(color_term("[{} in start in time: {}]".format(
+        stepName, start_time2)))
     print(color_term("{}".format("=" * equalSignNumber)))
     # start pipelien
-    
+
     # end
     end_time = time.time()
-    end_time2 = time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(end_time/1000))
+    end_time2 = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))
     ran_time = (end_time - start_time) / 60
     print(color_term("{}".format("=" * equalSignNumber)))
-    print(color_term("[{} in end in time: {}, elapsed {:.1f} min]".format( stepName, end_time2, ran_time)))
+    print(color_term("[{} in end in time: {}, elapsed {:.1f} min]".format(
+        stepName, end_time2, ran_time)))
     print(color_term("{}".format("=" * equalSignNumber)))
 
 
 if __name__ == '__main__':
     try:
         parser = argparse.ArgumentParser(
-            prog="Standard".format(__VERSION__),
-            description="This is a RNAseq_pipeline."
+            prog="template".format(__VERSION__),
+            description="This is a pipeline of XX."
         )
         # formatter_class=argparse.RawTextHelpFormatter,
         # https://docs.python.org/3/library/argparse.html
@@ -65,6 +69,10 @@ if __name__ == '__main__':
             type=str,
             help="Specify output directory",
             metavar='')
+        cfg = ConfigParser()
+        cfg.read('config.ini')  # python3
+        gene_annotation = cfg.get('GRCh37', 'gene_annotation')
+        fasta_file = cfg.get('GRCh37', 'fasta_file')
         args = parser.parse_args()
         input_dir = os.path.abspath(args.inputdir)
         output_dir = os.path.abspath(args.outputdir)
