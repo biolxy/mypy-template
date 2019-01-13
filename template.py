@@ -70,7 +70,9 @@ if __name__ == '__main__':
             help="Specify output directory",
             metavar='')
         cfg = ConfigParser()
-        cfg.read('config.ini')  # python3
+        path_py = os.path.abspath(os.path.dirname(__file__))
+        configfile = os.path.join(path_py, "config.ini")
+        cfg.read(configfile)   # python3
         gene_annotation = cfg.get('GRCh37', 'gene_annotation')
         fasta_file = cfg.get('GRCh37', 'fasta_file')
         args = parser.parse_args()
