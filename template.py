@@ -11,7 +11,7 @@ Function    : The is a template.
 """
 from util.base import color_term
 from util.base import execute_cmd
-from util.base import StreamToLogger
+from util.base import StreamToLogger, 
 import os
 import re
 import time
@@ -24,14 +24,7 @@ __VERSION__ = 'v1.0'
 
 def main():
     stepName = "fastp"
-    equalSignNumber = 60
-    start_time = time.time()
-    start_time2 = time.strftime(
-        '%Y-%m-%d %H:%M:%S', time.localtime(start_time))
-    print(color_term("{}".format("=" * equalSignNumber)))
-    print(color_term("[{} in start in time: {}]".format(
-        stepName, start_time2)))
-    print(color_term("{}".format("=" * equalSignNumber)))
+
     # start pipelien
 
     # end
