@@ -35,6 +35,8 @@ from util.base import color_term  #此时该脚本和文件夹util在同一目�
 + shell命令行的嵌套
     * function execute_cmd 
 + 确定输入文件 import re，os
++ progressPrintStr，实现便捷的记时与 Identifier output
+    + ![](Snipaste_2019-01-23_14-32-58.png)
 ## 3、 template.py
 + 通过 import argparse，使用参数
 + 输出程序运行时间 import time
