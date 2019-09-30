@@ -46,8 +46,8 @@ if __name__ == '__main__':
         parser = argparse.ArgumentParser(
             prog="RNAseq".format(__VERSION__),
             description=
-            "This is a pipeline of sino-TA-RNA, developed by yeh and biolxy \
-            in sinomics company, with all rights reserved.")
+            "This is a pipeline of RNAseq, developed by biolxy \
+            in YunFan company, with all rights reserved.")
         parser.add_argument(
             '-i',
             '--inputfile',
