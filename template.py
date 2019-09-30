@@ -5,14 +5,11 @@ File Name   : template.py .
 
 Author      : biolxy
 E-mail      : biolxy@aliyun.com
-Created Time: 2018-09-17 12:10:33
+Created Time: 2019-09-29 21:32:16
 version     : 1.0
-Function    : The is a template.
+Function    : The author is too lazy to write nothing
+Usage       :
 """
-from utils.base import color_term, getFile
-from utils.base import execute_cmd2, execute_cmd2
-from utils.base import StreamToLogger
-from utils.base import progressPrintStr
 import os, sys
 import re
 import time
@@ -28,16 +25,13 @@ def mkoutdir(indir):
 
 
 def main():
-    stepName = "RNAseq"
-    echo = progressPrintStr(stepName)
-    echo.start()
     # start pipelien
 
     if re.search('fp', runoptions):
         mkoutdir("{outputDir}/1.fastq-out".format(outputDir=outputDir))
         returnNum = execute_cmd2(
             "python {path_py}/Fastp.py -i {rawdata} -o {outputDir}/1.fastq-out"
-            .format(path_py=path_py, rawdata=inputDir, outputDir=outputDir))
+            .format(path_py=SCRIPT_FOLDER, rawdata=inputDir, outputDir=outputDir))
         if returnNum != 0:
             print(color_term("error, program interruption", "red"))
             sys.exit()
@@ -48,10 +42,7 @@ def main():
 
 if __name__ == '__main__':
     try:
-        cfg = ConfigParser()
-        path_py = os.path.abspath(os.path.dirname(__file__))
-        configfile = os.path.join(path_py, "config.ini")
-        cfg.read(configfile)  # python3
+        SCRIPT_FOLDER = os.path.abspath(os.path.dirname(__file__))
         parser = argparse.ArgumentParser(
             prog="RNAseq".format(__VERSION__),
             description=
@@ -59,26 +50,27 @@ if __name__ == '__main__':
             in sinomics company, with all rights reserved.")
         parser.add_argument(
             '-i',
-            '--inputdir',
+            '--inputfile',
             type=str,
-            help=
-            "input dir for raw fastq dir, 'normal' or 'tumor' should be present in fastq file name,\
-            and suffix should in {}.".format(fastqsuffixList),
+            help="input file",
+            required=True,
             metavar='')
         parser.add_argument('-o',
                             '--outputdir',
                             type=str,
                             help="specify output directory",
+                            required=True,
                             metavar='')
-        parser.add_argument(
-            '-r',
-            '--runoptions',
-            type=str,
-            help="Specifies the program to run",
-            default='fpstarmkresmcganovelsplitmutecthlafusionsomaticaffinity')
-
-        gene_annotation = cfg.get('GRCh37', 'gene_annotation')
-        fasta_file = cfg.get('GRCh37', 'fasta_file')
+        parser.add_argument('-r',
+                            '--runoptions',
+                            type=str,
+                            help="Specifies the program to run",
+                            default='fpstarmkresm',
+                            metavar='')
+        # cfg = ConfigParser()
+        # configfile = os.path.join(path_py, "config.ini")
+        # cfg.read(configfile)  # python3
+        # gene_annotation = cfg.get('GRCh37', 'gene_annotation')
         args = parser.parse_args()
         inputDir = os.path.abspath(args.inputdir)
         outputDir = os.path.abspath(args.outputdir)
