@@ -51,4 +51,4 @@ def logPrint(logfile, info):
 
 if __name__ == "__main__":
     # loginfo -- info for which you want print
-    logPrint(logfile, loginfo)
+    # logPrint(logfile, loginfo)

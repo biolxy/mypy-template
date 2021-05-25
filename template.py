@@ -15,6 +15,7 @@ import re
 import time
 import argparse
 from configparser import ConfigParser
+from utils.base import *
 
 __VERSION__ = 'v1.0'
 
@@ -26,7 +27,7 @@ def mkoutdir(indir):
 
 def main():
     # start pipelien
-
+    # echo.strat()
     if re.search('fp', runoptions):
         mkoutdir("{outputDir}/1.fastq-out".format(outputDir=outputDir))
         returnNum = execute_cmd2(
@@ -37,14 +38,14 @@ def main():
             sys.exit()
 
     # end
-    echo.stop()
+    # echo.stop()
 
 
 if __name__ == '__main__':
     try:
         SCRIPT_FOLDER = os.path.abspath(os.path.dirname(__file__))
         parser = argparse.ArgumentParser(
-            prog="RNAseq".format(__VERSION__),
+            prog="RNAseq {}".format(__VERSION__),
             description=
             "This is a pipeline of RNAseq, developed by biolxy \
             in YunFan company, with all rights reserved.")
